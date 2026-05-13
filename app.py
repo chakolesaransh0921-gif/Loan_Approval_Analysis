@@ -263,7 +263,9 @@ with st.sidebar:
     app_income  = st.number_input("Applicant Income (₹)",   0, 200000, 5000, step=500)
     co_income   = st.number_input("Coapplicant Income (₹)", 0,  100000, 0, step=500)
     loan_amt    = st.number_input("Loan Amount (₹ 000s)",   0, 700, 150, step=10)
-    loan_term   = st.select_slider("Loan Term (months)",    options=[120,180,240,300,360,480], value=360)
+    loan_term   = st.slider("Loan Term (months)", min_value=1, max_value=120, value=60,
+                            help="1 month → 120 months (10 years)")
+    st.caption(f"📅 {loan_term} month{'s' if loan_term > 1 else ''} = {loan_term//12} yr{'s' if loan_term//12 != 1 else ''} {loan_term%12} mo")
     credit_hist = st.selectbox("Credit History",            [1.0, 0.0],
                                format_func=lambda x: "Good (1.0)" if x==1.0 else "Bad (0.0)")
 
